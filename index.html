@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport-fit=cover enables safe-area-inset for notched iPhones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elitex Media | Join the Elite</title>
+
+    <!-- Mobile browser chrome color -->
+    <meta name="theme-color" content="#030305">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Preconnect & DNS prefetch for all external origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://logo.clearbit.com">
+    <link rel="dns-prefetch" href="https://i.pravatar.cc">
+
+    <!-- Google Fonts — non-blocking (media=print swap trick) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- FontAwesome — loaded synchronously so icons always show immediately -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Critical above-fold CSS — mobile-first, inlined to eliminate render-blocking -->
+    <style>
+      :root{--bg-color:#030305;--surface-color:#0a0a0e;--border-color:rgba(255,255,255,0.07);--text-primary:#fff;--text-secondary:#888899;--gradient:linear-gradient(135deg,#e0e0e0,#888899)}
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+      html{scroll-behavior:smooth}
+      body{background-color:var(--bg-color);color:var(--text-primary);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+      header{position:fixed;width:100%;top:0;z-index:1000;background:rgba(3,3,5,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding-top:env(safe-area-inset-top,0px)}
+      .nav-container{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}
+      .logo{font-size:1.2rem;font-weight:700;letter-spacing:-.5px}.logo span{color:var(--text-secondary);font-weight:400}
+      .nav-cta{color:#fff;text-decoration:none;font-size:.8rem;font-weight:600;padding:8px 15px;border:1px solid var(--border-color);border-radius:40px;display:inline-flex;align-items:center}
+      .container{width:100%;padding-left:max(16px,calc(16px + env(safe-area-inset-left,0px)));padding-right:max(16px,calc(16px + env(safe-area-inset-right,0px)))}
+      .hero{display:flex;align-items:center;justify-content:center;position:relative;padding-top:calc(100px + env(safe-area-inset-top,0px));padding-bottom:28px}
+      @media(min-width:768px){.hero{min-height:75vh;padding-top:120px;padding-bottom:44px}}
+      .hero-container{position:relative;z-index:2;text-align:center;width:100%}
+      .hero h2{font-size:clamp(1.85rem,8vw,4.2rem);margin-bottom:10px;font-weight:500;letter-spacing:-.03em;line-height:1.15}
+      .hero p{font-size:clamp(.88rem,3.5vw,1.15rem);color:var(--text-secondary);max-width:480px;margin:0 auto 18px;font-weight:300;padding:0 4px;line-height:1.55}
+      .gradient-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      .cta-button{background:#fff;color:#000;text-decoration:none;padding:14px 26px;border-radius:40px;font-size:.92rem;font-weight:600;width:100%;max-width:290px;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+      .hero-perks{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:0 auto 20px;max-width:480px}
+      .perk-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:40px;font-size:.74rem;color:#e2e2ec}
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Elitex<span>Media</span></h1>
+            <a href="#apply" class="nav-cta">Apply Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="glow-orb orb-1"></div>
+
+        <div class="container hero-container">
+            <div class="hero-content fade-up">
+                <div class="badge">
+                    <span class="live-dot"></span> Summer 2026 Cohort · Now Open
+                </div>
+                <h2>We scale brands.<br><span class="gradient-text">You scale with us.</span></h2>
+                <p>Join a remote-first performance team scaling 100+ global brands. Mentorship, flexible hours, and real campaign ownership.</p>
+
+                <div class="hero-perks">
+                    <div class="perk-pill">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>₹10K+/Mo Stipend</span>
+                    </div>
+                    <div class="perk-pill">
+                        <i class="fa-solid fa-house-laptop"></i>
+                        <span>100% Remote</span>
+                    </div>
+                    <div class="perk-pill">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Flexible Hours</span>
+                    </div>
+                    <div class="perk-pill">
+                        <i class="fa-solid fa-certificate"></i>
+                        <span>Official Certificate</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#apply" class="cta-button">Apply in 60 Seconds <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="social-proof">
+                        <div class="avatars">
+                            <img src="https://i.pravatar.cc/100?img=1" alt="Team member" width="32" height="32" loading="eager" decoding="async">
+                            <img src="https://i.pravatar.cc/100?img=2" alt="Team member" width="32" height="32" loading="eager" decoding="async">
+                            <img src="https://i.pravatar.cc/100?img=3" alt="Team member" width="32" height="32" loading="eager" decoding="async">
+                        </div>
+                        <span>Join 200+ Growth Experts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By / Clients Section -->
+    <section class="trusted-by">
+        <div class="container">
+            <p class="trusted-label">TRUSTED BY FAST-GROWING BRANDS</p>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee">
+                <!-- Set 1 -->
+                <div class="client-logo" title="CRED">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 2L3 6v8c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4zm0 3.3l5 2.5v6.2c0 3.8-2.3 7.5-5 8.7-2.7-1.2-5-4.9-5-8.7V7.8l5-2.5z" fill="currentColor"/>
+                        <text x="25" y="19" font-family="'Inter',sans-serif" font-weight="800" font-size="14" letter-spacing="3" fill="currentColor">CRED</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Zepto">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="14" r="8" fill="rgba(255,255,255,0.1)"/>
+                        <path d="M11 8l-4 7h3.5l-1 5 4-7h-3.5l1-5z" fill="currentColor"/>
+                        <text x="24" y="20" font-family="'Inter',sans-serif" font-weight="700" font-size="16" letter-spacing="-0.5" fill="currentColor">zepto</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="PhysicsWallah">
+                    <svg class="brand-svg" viewBox="0 0 150 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="14" r="10" stroke="currentColor" stroke-width="1.8"/>
+                        <text x="7" y="18" font-family="'Inter',sans-serif" font-weight="900" font-size="11" fill="currentColor">PW</text>
+                        <text x="28" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="-0.2" fill="currentColor">PhysicsWallah</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="boAt Lifestyle">
+                    <svg class="brand-svg" viewBox="0 0 85 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19h13l-4.5 4.5c-.8.8-2.2.8-3 0L4 19zM11 4v12h5.5L11 4zM9 7L5 16h4V7z" fill="currentColor"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="15" letter-spacing="-0.5" fill="currentColor">bo<tspan font-weight="800">A</tspan>t</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="BYJU'S">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="6" width="16" height="16" rx="4" fill="rgba(255,255,255,0.12)"/>
+                        <text x="6" y="18" font-family="'Inter',sans-serif" font-weight="900" font-size="12" fill="currentColor">B</text>
+                        <text x="23" y="19" font-family="'Inter',sans-serif" font-weight="800" font-size="14" letter-spacing="0.5" fill="currentColor">BYJU'S</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Vedantu">
+                    <svg class="brand-svg" viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="14" r="8" fill="rgba(255,255,255,0.08)"/>
+                        <path d="M6 11l4 7 4-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="24" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="14" fill="currentColor">Vedantu</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="India's Got Talent">
+                    <svg class="brand-svg" viewBox="0 0 145 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4l2.5 5 5.5.8-4 3.9 1 5.3-5-2.6-5 2.6 1-5.3-4-3.9 5.5-.8L10 4z" fill="currentColor"/>
+                        <text x="24" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="12" letter-spacing="0.5" fill="currentColor">India's Got Talent</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Zomato">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <text x="2" y="20" font-family="'Inter',sans-serif" font-style="italic" font-weight="800" font-size="18" letter-spacing="-0.8" fill="currentColor">zomato</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Mamaearth">
+                    <svg class="brand-svg" viewBox="0 0 115 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 17c0-6 5-11 11-11 0 6-5 11-11 11z" fill="currentColor"/>
+                        <path d="M5 17c6 0 11-5 11-11" stroke="var(--bg-color)" stroke-width="1.5"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" fill="currentColor">mamaearth</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="AdilQadri">
+                    <svg class="brand-svg" viewBox="0 0 110 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 16l3-8 3 5 3-5 3 8H5z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="1" fill="currentColor">AdilQadri</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Patanjali">
+                    <svg class="brand-svg" viewBox="0 0 105 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="14" r="7" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M9 10v8M6 14h6" stroke="currentColor" stroke-width="1.4"/>
+                        <text x="21" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="0.5" fill="currentColor">PATANJALI</text>
+                    </svg>
+                </div>
+
+                <!-- Set 2 (duplicate for seamless infinite loop) -->
+                <div class="client-logo" title="CRED">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 2L3 6v8c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4zm0 3.3l5 2.5v6.2c0 3.8-2.3 7.5-5 8.7-2.7-1.2-5-4.9-5-8.7V7.8l5-2.5z" fill="currentColor"/>
+                        <text x="25" y="19" font-family="'Inter',sans-serif" font-weight="800" font-size="14" letter-spacing="3" fill="currentColor">CRED</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Zepto">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="14" r="8" fill="rgba(255,255,255,0.1)"/>
+                        <path d="M11 8l-4 7h3.5l-1 5 4-7h-3.5l1-5z" fill="currentColor"/>
+                        <text x="24" y="20" font-family="'Inter',sans-serif" font-weight="700" font-size="16" letter-spacing="-0.5" fill="currentColor">zepto</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="PhysicsWallah">
+                    <svg class="brand-svg" viewBox="0 0 150 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="14" r="10" stroke="currentColor" stroke-width="1.8"/>
+                        <text x="7" y="18" font-family="'Inter',sans-serif" font-weight="900" font-size="11" fill="currentColor">PW</text>
+                        <text x="28" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="-0.2" fill="currentColor">PhysicsWallah</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="boAt Lifestyle">
+                    <svg class="brand-svg" viewBox="0 0 85 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19h13l-4.5 4.5c-.8.8-2.2.8-3 0L4 19zM11 4v12h5.5L11 4zM9 7L5 16h4V7z" fill="currentColor"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="15" letter-spacing="-0.5" fill="currentColor">bo<tspan font-weight="800">A</tspan>t</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="BYJU'S">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="6" width="16" height="16" rx="4" fill="rgba(255,255,255,0.12)"/>
+                        <text x="6" y="18" font-family="'Inter',sans-serif" font-weight="900" font-size="12" fill="currentColor">B</text>
+                        <text x="23" y="19" font-family="'Inter',sans-serif" font-weight="800" font-size="14" letter-spacing="0.5" fill="currentColor">BYJU'S</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Vedantu">
+                    <svg class="brand-svg" viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="14" r="8" fill="rgba(255,255,255,0.08)"/>
+                        <path d="M6 11l4 7 4-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="24" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="14" fill="currentColor">Vedantu</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="India's Got Talent">
+                    <svg class="brand-svg" viewBox="0 0 145 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 4l2.5 5 5.5.8-4 3.9 1 5.3-5-2.6-5 2.6 1-5.3-4-3.9 5.5-.8L10 4z" fill="currentColor"/>
+                        <text x="24" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="12" letter-spacing="0.5" fill="currentColor">India's Got Talent</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Zomato">
+                    <svg class="brand-svg" viewBox="0 0 95 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <text x="2" y="20" font-family="'Inter',sans-serif" font-style="italic" font-weight="800" font-size="18" letter-spacing="-0.8" fill="currentColor">zomato</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Mamaearth">
+                    <svg class="brand-svg" viewBox="0 0 115 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 17c0-6 5-11 11-11 0 6-5 11-11 11z" fill="currentColor"/>
+                        <path d="M5 17c6 0 11-5 11-11" stroke="var(--bg-color)" stroke-width="1.5"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" fill="currentColor">mamaearth</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="AdilQadri">
+                    <svg class="brand-svg" viewBox="0 0 110 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 16l3-8 3 5 3-5 3 8H5z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                        <text x="22" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="1" fill="currentColor">AdilQadri</text>
+                    </svg>
+                </div>
+
+                <div class="client-logo" title="Patanjali">
+                    <svg class="brand-svg" viewBox="0 0 105 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="14" r="7" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M9 10v8M6 14h6" stroke="currentColor" stroke-width="1.4"/>
+                        <text x="21" y="19" font-family="'Inter',sans-serif" font-weight="700" font-size="13" letter-spacing="0.5" fill="currentColor">PATANJALI</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+     <!-- Agency Highlights / Proof & Perks Section -->
+     <section id="why-us" class="highlights-section">
+         <div class="container">
+             <div class="section-header fade-up">
+                 <p class="section-eyebrow">Why Elitex Media</p>
+                 <h2 class="section-title">Empowering 200+ Interns Across 100+ Global Brands</h2>
+                 <p class="section-subtitle">Real ad spend, high-impact brand exposure, and total schedule freedom.</p>
+             </div>
+
+             <div class="highlights-grid">
+                 <!-- Highlight 1: 100+ Brands -->
+                 <div class="highlight-card fade-up">
+                     <div class="highlight-icon-wrap">
+                         <i class="fa-solid fa-earth-americas"></i>
+                     </div>
+                     <div class="highlight-number">100+</div>
+                     <h3>Global Brands</h3>
+                     <p>Work directly on live performance campaigns for 100+ fast-growing brands across the US, UK, UAE & India.</p>
+                 </div>
+
+                 <!-- Highlight 2: 200+ Interns -->
+                 <div class="highlight-card fade-up delay-1">
+                     <div class="highlight-icon-wrap">
+                         <i class="fa-solid fa-users"></i>
+                     </div>
+                     <div class="highlight-number">200+</div>
+                     <h3>Interns Empowered</h3>
+                     <p>Over 200+ interns trained and mentored to become high-performing media buyers, strategists, and copywriters.</p>
+                 </div>
+
+                 <!-- Highlight 3: Certificate -->
+                 <div class="highlight-card fade-up delay-2">
+                     <div class="highlight-icon-wrap">
+                         <i class="fa-solid fa-certificate"></i>
+                     </div>
+                     <span class="highlight-badge">Verified Credential</span>
+                     <h3>Official Certificate</h3>
+                     <p>Earn an industry-recognized Certificate of Experience & LinkedIn recommendation as an official part of Elitex Media.</p>
+                 </div>
+
+                 <!-- Highlight 4: WFH & Flexible Hours -->
+                 <div class="highlight-card fade-up delay-1">
+                     <div class="highlight-icon-wrap">
+                         <i class="fa-solid fa-house-laptop"></i>
+                     </div>
+                     <span class="highlight-badge highlight-badge-accent">Earn ₹10K+/Mo</span>
+                     <h3>Work From Home & Earn</h3>
+                     <p>Be financially independent. Earn up to ₹10,000+/month from home on flexible hours around college or life — we reward real outputs and results.</p>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+    <!-- Roles Section -->
+    <section id="roles" class="roles-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <p class="section-eyebrow">We're Hiring</p>
+                <h2 class="section-title">Open Roles</h2>
+                <p class="section-subtitle">Join a team that operates at the intersection of data, creativity, and revenue growth.</p>
+            </div>
+            <div class="roles-grid">
+
+                <!-- Role 1 -->
+                <div class="role-card fade-up">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag tag-hot">High Demand</span>
+                        </div>
+                    </div>
+                    <h3>Media Buyer</h3>
+                    <p>Scale profitable campaigns across Meta, Google, and TikTok. You live in dashboards, think in ROAS, and never sleep on a bad CPA.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="role-card fade-up delay-1">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag">Full-time</span>
+                        </div>
+                    </div>
+                    <h3>Performance Marketer</h3>
+                    <p>Own full-funnel paid strategy for 7-figure brands. You relentlessly optimize CAC, LTV, and blended ROAS with a first-principles mindset.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="role-card fade-up delay-2">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag tag-hot">Hot Role</span>
+                        </div>
+                    </div>
+                    <h3>Creative Strategist</h3>
+                    <p>Bridge the gap between data and creativity. You brief scroll-stopping UGC and static ads, study creative analytics, and iterate fast.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Role 4 -->
+                <div class="role-card fade-up">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag">Part-time OK</span>
+                        </div>
+                    </div>
+                    <h3>SEO & Growth Strategist</h3>
+                    <p>Build compounding organic revenue engines. You think in content clusters, technical audits, and topical authority — not just keywords.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Role 5 -->
+                <div class="role-card fade-up delay-1">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-envelope-open"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag">Full-time</span>
+                        </div>
+                    </div>
+                    <h3>Email & CRM Specialist</h3>
+                    <p>Engineer retention and revenue flows with Klaviyo, flows, and segments. You turn one-time buyers into repeat customers at scale.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Role 6 -->
+                <div class="role-card fade-up delay-2">
+                    <div class="role-card-top">
+                        <div class="role-icon-wrap">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div class="role-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag">Full-time</span>
+                        </div>
+                    </div>
+                    <h3>Conversion Copywriter</h3>
+                    <p>Write direct-response copy that sells — ads, landing pages, VSLs, and email sequences. Every word earns its place.</p>
+                    <a href="#apply" class="role-apply-link">Apply for this role <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section id="apply" class="apply-section">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Ready to start earning?</h2>
+                    <p>Earn up to ₹10,000+/month · 100% Remote · Flexible Hours · Certificate of Experience provided. Drop your details below.</p>
+                    <div id="hrBadge" class="hr-badge-banner hidden">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>Applying via HR Referral: <strong id="hrBadgeName"></strong></span>
+                    </div>
+                </div>
+
+                <form id="applicationForm" class="smooth-form">
+                    <!-- Row 1: Name -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" required placeholder="Jane" autocomplete="given-name" inputmode="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" required placeholder="Doe" autocomplete="family-name" inputmode="text">
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Email & Contact (+91) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" required placeholder="jane@example.com" autocomplete="email" inputmode="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Contact Number <span class="required">*</span></label>
+                            <div class="phone-input-group">
+                                <span class="phone-prefix">+91</span>
+                                <input type="tel" id="phone" required placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" autocomplete="tel-national">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: State & Gender -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">State / Region <span class="required">*</span></label>
+                            <select id="state" required>
+                                <option value="" disabled selected>Select your state</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Delhi NCR">Delhi NCR</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Other">Other / International</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" required>
+                                <option value="" disabled selected>Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Non-binary / Other">Non-binary / Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Preferred Language & Experience -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="language">Preferred Language <span class="required">*</span></label>
+                            <select id="language" required>
+                                <option value="" disabled selected>Select language</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="English & Hindi">English & Hindi (Bilingual)</option>
+                                <option value="Hinglish">Hinglish</option>
+                                <option value="Other">Other Regional Language</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Experience Level <span class="required">*</span></label>
+                            <select id="experience" required>
+                                <option value="" disabled selected>Select experience</option>
+                                <option value="0 (Fresher / Student)">0 (Fresher / Student)</option>
+                                <option value="1 - 2 Years">1 - 2 Years</option>
+                                <option value="3+ Years">3+ Years</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Links -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="resume">Resume / Portfolio Link <span class="required">*</span></label>
+                            <input type="url" id="resume" required placeholder="Google Drive / Notion / Portfolio link" autocomplete="url" inputmode="url">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn Profile <span class="optional">(Optional)</span></label>
+                            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username" autocomplete="url" inputmode="url">
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Skills -->
+                    <div class="form-group">
+                        <label for="skills">Skills & Expertise <span class="required">*</span></label>
+                        <input type="text" id="skills" required placeholder="e.g. Meta Ads, Google Ads, Copywriting, SEO, Video Editing, Canva" inputmode="text">
+                    </div>
+
+                    <!-- Row 7: Academic Marks (%) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="class10">Class 10 Marks (%) <span class="required">*</span></label>
+                            <input type="number" id="class10" required placeholder="e.g. 85" min="0" max="100" step="0.1" inputmode="decimal">
+                        </div>
+                        <div class="form-group">
+                            <label for="class12">Class 12 Marks (%) <span class="required">*</span></label>
+                            <input type="number" id="class12" required placeholder="e.g. 88" min="0" max="100" step="0.1" inputmode="decimal">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Submit Application</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <div id="form-message" class="message hidden"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Elitex<span>Media</span></div>
+            <p>&copy; 2026 Elitex Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase Compat SDK — deferred so they never block rendering -->
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
