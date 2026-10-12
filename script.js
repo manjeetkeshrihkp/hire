@@ -75,6 +75,39 @@ const closeSuccessModal = () => successModal.classList.add('hidden');
 document.getElementById('closeSuccessModal').addEventListener('click', closeSuccessModal);
 document.getElementById('successModalDone').addEventListener('click', closeSuccessModal);
 
+document.getElementById('googleSignIn').addEventListener('click', async function() {
+    const emailInput = document.getElementById('email');
+    const msgEl = document.getElementById('form-message');
+    const originalText = this.innerHTML;
+    this.disabled = true;
+    this.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Connecting...';
+
+    try {
+        const result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        const email = (result.user.email || '').toLowerCase();
+        if (!email.endsWith('@gmail.com')) {
+            await auth.signOut();
+            throw new Error('Please use a personal Gmail account ending in @gmail.com.');
+        }
+        emailInput.value = email;
+        const emailDisplay = document.getElementById('emailDisplay');
+        emailDisplay.textContent = email;
+        emailDisplay.classList.remove('hidden');
+        this.classList.add('hidden');
+        localStorage.setItem(verifiedEmailKey, email);
+        msgEl.textContent = 'Gmail verified. You can now submit your application.';
+        msgEl.style.color = '#fff';
+        msgEl.classList.remove('hidden');
+    } catch (err) {
+        msgEl.textContent = err.message || 'Google sign-in was cancelled or could not be completed.';
+        msgEl.style.color = '#ff6b6b';
+        msgEl.classList.remove('hidden');
+    } finally {
+        this.disabled = false;
+        this.innerHTML = originalText;
+    }
+});
+
 const formFieldIds = ['firstName', 'lastName', 'email', 'phone', 'state', 'gender', 'language', 'experience', 'skills', 'class10', 'class12', 'policyConsent'];
 const savePendingApplication = () => {
     const values = {};
@@ -139,22 +172,10 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         // Continue normally when browser storage is unavailable.
     }
 
-    if (localStorage.getItem(verifiedEmailKey) !== email.toLowerCase()) {
-        try {
-            savePendingApplication();
-            await auth.sendSignInLinkToEmail(email, {
-                url: 'https://manjeetkeshrihkp.github.io/hire/',
-                handleCodeInApp: true
-            });
-            localStorage.setItem(pendingEmailKey, email.toLowerCase());
-            showSuccessModal('Check your Gmail', 'We sent a verification link to your email. Open it, return here, and submit your application again.');
-        } catch (err) {
-            msgEl.textContent = err.code === 'auth/configuration-not-found'
-                ? 'Email verification is not enabled yet. Please enable Email link sign-in in the Firebase Console.'
-                : (err.message || 'Unable to send the verification email. Please try again.');
-            msgEl.style.color = '#ff6b6b';
-            msgEl.classList.remove('hidden');
-        }
+    if (!email || localStorage.getItem(verifiedEmailKey) !== email.toLowerCase()) {
+        msgEl.textContent = 'Please use Fetch with Google to add and verify your Gmail address.';
+        msgEl.style.color = '#ff6b6b';
+        msgEl.classList.remove('hidden');
         return;
     }
 
