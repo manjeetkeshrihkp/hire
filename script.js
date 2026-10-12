@@ -13,6 +13,10 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const auth = firebase.auth();
+const verifiedEmailKey = 'elitex_verified_email';
+const pendingEmailKey = 'elitex_pending_email';
+const pendingApplicationKey = 'elitex_pending_application';
 
 // Enable animations once JS is running
 document.body.classList.add('js-loaded');
@@ -59,6 +63,53 @@ const observer = new IntersectionObserver((entries, obs) => {
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+const successModal = document.getElementById('successModal');
+const successModalTitle = document.getElementById('successModalTitle');
+const successModalMessage = document.getElementById('successModalMessage');
+const showSuccessModal = (title, message) => {
+    successModalTitle.textContent = title;
+    successModalMessage.textContent = message;
+    successModal.classList.remove('hidden');
+};
+const closeSuccessModal = () => successModal.classList.add('hidden');
+document.getElementById('closeSuccessModal').addEventListener('click', closeSuccessModal);
+document.getElementById('successModalDone').addEventListener('click', closeSuccessModal);
+
+const formFieldIds = ['firstName', 'lastName', 'email', 'phone', 'state', 'gender', 'language', 'experience', 'skills', 'class10', 'class12', 'policyConsent'];
+const savePendingApplication = () => {
+    const values = {};
+    formFieldIds.forEach(id => {
+        const field = document.getElementById(id);
+        values[id] = field.type === 'checkbox' ? field.checked : field.value;
+    });
+    localStorage.setItem(pendingApplicationKey, JSON.stringify(values));
+};
+const restorePendingApplication = () => {
+    const saved = JSON.parse(localStorage.getItem(pendingApplicationKey) || 'null');
+    if (!saved) return;
+    formFieldIds.forEach(id => {
+        const field = document.getElementById(id);
+        if (field.type === 'checkbox') field.checked = Boolean(saved[id]);
+        else if (saved[id] !== undefined) field.value = saved[id];
+    });
+    localStorage.removeItem(pendingApplicationKey);
+};
+
+if (auth.isSignInWithEmailLink(window.location.href)) {
+    const pendingEmail = localStorage.getItem(pendingEmailKey);
+    if (pendingEmail) {
+        auth.signInWithEmailLink(pendingEmail, window.location.href)
+            .then(() => {
+                localStorage.setItem(verifiedEmailKey, pendingEmail.toLowerCase());
+                localStorage.removeItem(pendingEmailKey);
+                restorePendingApplication();
+                window.history.replaceState({}, document.title, window.location.pathname);
+                showSuccessModal('Email verified', 'Your Gmail address is verified. Click Done, then submit your application.');
+            })
+            .catch(() => showSuccessModal('Verification failed', 'This verification link is invalid or expired. Please submit your email again.'));
+    }
+}
+
 // ─── Form submission ─────────────────────────────────────────────────────────
 document.getElementById('applicationForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -73,11 +124,39 @@ document.getElementById('applicationForm').addEventListener('submit', async func
     const gender     = document.getElementById('gender').value;
     const language   = document.getElementById('language').value;
     const experience = document.getElementById('experience').value;
-    const resume     = document.getElementById('resume').value.trim();
-    const linkedin   = document.getElementById('linkedin').value.trim();
     const skills     = document.getElementById('skills').value.trim();
-    const class10    = document.getElementById('class10').value.trim();
-    const class12    = document.getElementById('class12').value.trim();
+    const class10    = document.getElementById('class10').checked;
+    const class12    = document.getElementById('class12').checked;
+    const submitBtn  = document.querySelector('.submit-btn');
+    const msgEl      = document.getElementById('form-message');
+
+    try {
+        if (localStorage.getItem('elitex_application_submitted_email') === email.toLowerCase()) {
+            showSuccessModal('Already submitted', 'You have already submitted an application. Our team will connect with you within 24 hours.');
+            return;
+        }
+    } catch (e) {
+        // Continue normally when browser storage is unavailable.
+    }
+
+    if (localStorage.getItem(verifiedEmailKey) !== email.toLowerCase()) {
+        try {
+            savePendingApplication();
+            await auth.sendSignInLinkToEmail(email, {
+                url: 'https://manjeetkeshrihkp.github.io/hire/',
+                handleCodeInApp: true
+            });
+            localStorage.setItem(pendingEmailKey, email.toLowerCase());
+            showSuccessModal('Check your Gmail', 'We sent a verification link to your email. Open it, return here, and submit your application again.');
+        } catch (err) {
+            msgEl.textContent = err.code === 'auth/configuration-not-found'
+                ? 'Email verification is not enabled yet. Please enable Email link sign-in in the Firebase Console.'
+                : (err.message || 'Unable to send the verification email. Please try again.');
+            msgEl.style.color = '#ff6b6b';
+            msgEl.classList.remove('hidden');
+        }
+        return;
+    }
 
     // Determine HR referral source
     let referredBy = 'direct';
@@ -87,9 +166,6 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         referredBy = hrUrlParam || 'direct';
     }
     referredBy = (referredBy || 'direct').trim().toLowerCase();
-
-    const submitBtn = document.querySelector('.submit-btn');
-    const msgEl     = document.getElementById('form-message');
 
     // Loading state
     const original = submitBtn.innerHTML;
@@ -109,12 +185,9 @@ document.getElementById('applicationForm').addEventListener('submit', async func
             gender,
             language,
             experience,
-            resume,
-            portfolio: resume, // legacy fallback
-            linkedin: linkedin || '',
             skills,
-            class10: class10 ? parseFloat(class10) : null,
-            class12: class12 ? parseFloat(class12) : null,
+            class10,
+            class12,
             referredBy: referredBy,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
@@ -122,6 +195,13 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         msgEl.textContent = `Thanks, ${firstName}! We've received your application. Our team will review it shortly.`;
         msgEl.style.color = '#fff';
         msgEl.classList.remove('hidden');
+        showSuccessModal('Application submitted', `Thank you, ${firstName}. Our team will connect with you within 24 hours.`);
+        try {
+            localStorage.setItem('elitex_application_submitted_email', email.toLowerCase());
+            localStorage.removeItem(verifiedEmailKey);
+        } catch (e) {
+            // The confirmation still works when browser storage is unavailable.
+        }
         this.reset();
 
     } catch (err) {

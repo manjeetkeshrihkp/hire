@@ -911,6 +911,33 @@ label {
     letter-spacing: 0.2px;
 }
 
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    margin-bottom: 0;
+    padding: 13px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.checkbox-option input {
+    width: 18px;
+    min-height: 18px;
+    padding: 0;
+    -webkit-appearance: checkbox;
+    appearance: auto;
+    accent-color: #93c5fd;
+    cursor: pointer;
+}
+
+.checkbox-option span {
+    color: #fff;
+}
+
 .required {
     color: #ff6b6b;
     margin-left: 2px;
@@ -1040,6 +1067,80 @@ input:focus, select:focus {
 }
 
 .hidden { display: none; }
+
+.success-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.success-modal.hidden { display: none; }
+
+.success-modal-card {
+    position: relative;
+    width: min(100%, 420px);
+    padding: 34px 26px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    background: #101014;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.success-modal-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #fff;
+    color: #101014;
+    font-size: 1.4rem;
+}
+
+.success-modal-card h2 {
+    margin-bottom: 8px;
+    font-size: 1.35rem;
+}
+
+.success-modal-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.success-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.success-modal-button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 40px;
+    background: #fff;
+    color: #000;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
 
 /* ══════════════════════════════════════════════════
    FOOTER
