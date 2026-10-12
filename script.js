@@ -21,37 +21,6 @@ const pendingApplicationKey = 'elitex_pending_application';
 // Enable animations once JS is running
 document.body.classList.add('js-loaded');
 
-// ─── HR Referral Tracking ───────────────────────────────────────────────────
-const urlParams = new URLSearchParams(window.location.search);
-const hrUrlParam = (urlParams.get('hr') || urlParams.get('ref') || '').trim().toLowerCase();
-
-if (hrUrlParam) {
-    try {
-        sessionStorage.setItem('elitex_hr_ref', hrUrlParam);
-        localStorage.setItem('elitex_hr_ref', hrUrlParam);
-    } catch (e) {}
-}
-
-const activeHrRef = (function() {
-    try {
-        return sessionStorage.getItem('elitex_hr_ref') || localStorage.getItem('elitex_hr_ref') || hrUrlParam;
-    } catch (e) {
-        return hrUrlParam;
-    }
-})();
-
-if (activeHrRef && activeHrRef !== 'direct') {
-    const hrBadge = document.getElementById('hrBadge');
-    const hrBadgeName = document.getElementById('hrBadgeName');
-    if (hrBadge && hrBadgeName) {
-        hrBadgeName.textContent = activeHrRef.toUpperCase();
-        hrBadge.classList.remove('hidden');
-    }
-}
-
-// ─── Scroll-driven fade-up animations ───────────────────────────────────────
-// rootMargin "0px 0px -50px 0px" triggers slightly before element is fully
-// in view → feels snappier / no pop-in at the last moment.
 const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -62,6 +31,18 @@ const observer = new IntersectionObserver((entries, obs) => {
 }, { rootMargin: '0px 0px -50px 0px', threshold: 0 });
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+if (new URLSearchParams(window.location.search).get('agent') === '1') {
+    const applicationForm = document.getElementById('applicationForm');
+    const submitButton = applicationForm && applicationForm.querySelector('.submit-btn');
+    if (applicationForm && submitButton && !document.getElementById('referralCode')) {
+        const referralGroup = document.createElement('div');
+        referralGroup.className = 'form-group';
+        referralGroup.innerHTML = '<label for="referralCode">Referral Code <span class="optional">(Optional)</span></label>' +
+            '<input type="text" id="referralCode" placeholder="Enter referral code" autocomplete="off" inputmode="text">';
+        applicationForm.insertBefore(referralGroup, submitButton);
+    }
+}
 
 const successModal = document.getElementById('successModal');
 const successModalTitle = document.getElementById('successModalTitle');
@@ -107,8 +88,7 @@ document.getElementById('googleSignIn').addEventListener('click', async function
         this.innerHTML = originalText;
     }
 });
-
-const formFieldIds = ['firstName', 'lastName', 'email', 'phone', 'state', 'gender', 'language', 'experience', 'skills', 'class10', 'class12', 'policyConsent'];
+const formFieldIds = ['firstName', 'lastName', 'email', 'phone', 'state', 'gender', 'language', 'experience', 'currentStatus', 'skills', 'class10', 'class12', 'policyConsent'];
 const savePendingApplication = () => {
     const values = {};
     formFieldIds.forEach(id => {
@@ -127,7 +107,6 @@ const restorePendingApplication = () => {
     });
     localStorage.removeItem(pendingApplicationKey);
 };
-
 if (auth.isSignInWithEmailLink(window.location.href)) {
     const pendingEmail = localStorage.getItem(pendingEmailKey);
     if (pendingEmail) {
@@ -142,8 +121,6 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
             .catch(() => showSuccessModal('Verification failed', 'This verification link is invalid or expired. Please submit your email again.'));
     }
 }
-
-// ─── Form submission ─────────────────────────────────────────────────────────
 document.getElementById('applicationForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -157,7 +134,10 @@ document.getElementById('applicationForm').addEventListener('submit', async func
     const gender     = document.getElementById('gender').value;
     const language   = document.getElementById('language').value;
     const experience = document.getElementById('experience').value;
+    const currentStatus = document.getElementById('currentStatus').value;
     const skills     = document.getElementById('skills').value.trim();
+    const referralCodeField = document.getElementById('referralCode');
+    const referralCode = referralCodeField ? referralCodeField.value.trim() : '';
     const class10    = document.getElementById('class10').checked;
     const class12    = document.getElementById('class12').checked;
     const submitBtn  = document.querySelector('.submit-btn');
@@ -179,16 +159,6 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         return;
     }
 
-    // Determine HR referral source
-    let referredBy = 'direct';
-    try {
-        referredBy = sessionStorage.getItem('elitex_hr_ref') || localStorage.getItem('elitex_hr_ref') || hrUrlParam || 'direct';
-    } catch (e) {
-        referredBy = hrUrlParam || 'direct';
-    }
-    referredBy = (referredBy || 'direct').trim().toLowerCase();
-
-    // Loading state
     const original = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Submitting Application...</span>';
     submitBtn.style.opacity = '0.8';
@@ -198,7 +168,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         await db.collection('applications').add({
             firstName,
             lastName,
-            name: fullName, // composite name for legacy queries
+            name: fullName, 
             email,
             phone,
             rawPhone: phoneInput,
@@ -206,10 +176,11 @@ document.getElementById('applicationForm').addEventListener('submit', async func
             gender,
             language,
             experience,
+            currentStatus,
             skills,
+            referralCode,
             class10,
             class12,
-            referredBy: referredBy,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
@@ -221,7 +192,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
             localStorage.setItem('elitex_application_submitted_email', email.toLowerCase());
             localStorage.removeItem(verifiedEmailKey);
         } catch (e) {
-            // The confirmation still works when browser storage is unavailable.
+           
         }
         this.reset();
 
@@ -239,3 +210,5 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         setTimeout(() => msgEl.classList.add('hidden'), 7000);
     }
 });
+
+
